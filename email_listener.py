@@ -73,6 +73,7 @@ def _listen_loop(
                 service,
                 max_results=5,
                 query="subject:[JobAgent] in:inbox",
+                days_back=0,
             )
         except Exception as e:
             print(f"[Listener] 抓信失敗：{e}，60 秒後重試。")
