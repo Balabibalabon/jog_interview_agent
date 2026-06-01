@@ -1,0 +1,25 @@
+# ── Core ────────────────────────────────────────────────────────────────────
+langgraph>=0.2
+langgraph-checkpoint-postgres>=3.0
+openai>=1.0
+python-dotenv>=1.0
+
+# ── Database ─────────────────────────────────────────────────────────────────
+psycopg[binary]>=3.1          # PostgresSaver 使用
+psycopg2-binary>=2.9          # Node 8 pgvector 使用
+pgvector>=0.3.0               # Phase 5：pgvector Python 客戶端
+
+# ── Network research ─────────────────────────────────────────────────────────
+tavily-python>=0.3.0          # Phase 5：公司調研
+
+# ── Gmail ────────────────────────────────────────────────────────────────────
+google-auth-oauthlib>=1.0
+google-auth-httplib2>=0.2
+google-api-python-client>=2.0
+
+# ── LangSmith ────────────────────────────────────────────────────────────────
+langsmith>=0.1
+
+# ── Resume parsing（Node 2 真實實作時啟用）────────────────────────────────────
+# pypdf>=4.0.0
+# python-docx>=1.0.0

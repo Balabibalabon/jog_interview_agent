@@ -1,0 +1,13 @@
+.env
+/job_interview
+*.json
+/tests
+/reports
+*.pdf
+*pycache*
+/.pytest_cache
+debug_classify.py
+drawgraph.py
+langsmith_test.py
+langsmith_eval*
+testpdf.py
