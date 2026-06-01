@@ -130,15 +130,21 @@ def fetch_recent_emails(
     service,
     max_results: int = 10,
     query: str = "",
+    days_back: int = 1,
 ) -> List[Dict]:
     try:
+        from datetime import date, timedelta
+        today = date.today()
+        since = today - timedelta(days=days_back)
+        date_query = f"after:{since.strftime('%Y/%m/%d')} before:{today.strftime('%Y/%m/%d')}"
+
         list_params = {
             "userId": "me",
             "maxResults": max_results,
             "labelIds": ["INBOX"],
         }
-        if query:
-            list_params["q"] = query
+        combined_query = f"{date_query} {query}".strip()
+        list_params["q"] = combined_query
 
         result = service.users().messages().list(**list_params).execute()
         messages = result.get("messages", [])

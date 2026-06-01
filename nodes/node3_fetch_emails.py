@@ -104,6 +104,7 @@ GMAIL_QUERY = (
     "-subject:[JobAgent]"
 )
 GMAIL_MAX_RESULTS = 20
+GMAIL_DAYS_BACK = int(os.getenv("GMAIL_DAYS_BACK", "1"))
 
 
 # ---------------------------------------------------------------------------
@@ -166,6 +167,7 @@ def _fetch_real_emails() -> list[dict]:
             service,
             max_results=GMAIL_MAX_RESULTS,
             query=GMAIL_QUERY,
+            days_back=GMAIL_DAYS_BACK,
         )
         return emails
     except FileNotFoundError as e:
