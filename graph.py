@@ -151,6 +151,21 @@ def _make_checkpointer(use_postgres: bool = False):
         return checkpointer
     return MemorySaver()
 
+# ---------------------------------------------------------------------------
+# Store 工廠
+# ---------------------------------------------------------------------------
+def _make_store(store=None, use_postgres: bool = False):
+    if store is not None:
+        return store
+    if use_postgres:
+        from langgraph.store.postgres import PostgresStore
+        import psycopg
+        conn = psycopg.connect(os.environ["POSTGRES_URI"], autocommit=True)
+        pg_store = PostgresStore(conn)
+        pg_store.setup()          # 建立 store 用的 table（首次執行需要）
+        return pg_store
+    return InMemoryStore()
+
 
 # ---------------------------------------------------------------------------
 # Graph 組裝
@@ -165,7 +180,8 @@ def build_graph(store=None, use_postgres: bool = False):
         use_postgres: True → PostgresSaver；False → MemorySaver。
     """
 
-    _store       = store or InMemoryStore()
+    # _store       = store or InMemoryStore()
+    _store       = _make_store(store=store, use_postgres=use_postgres)
     checkpointer = _make_checkpointer(use_postgres=use_postgres)
 
     # ── 節點實例化 ──────────────────────────────────────────────────────

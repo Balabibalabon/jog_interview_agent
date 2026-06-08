@@ -98,9 +98,16 @@ MOCK_EMAILS = [
 ]
 
 # Gmail 搜尋條件
+# GMAIL_QUERY = (
+#     "from:104.com.tw OR from:linkedin.com OR from:yourator.co OR from:cakeresume.com "
+#     "OR subject:詢問意願 OR subject:面試邀請 OR subject:職缺邀請 "
+#     "-subject:[JobAgent]"
+# )
 GMAIL_QUERY = (
+    "("
     "from:104.com.tw OR from:linkedin.com OR from:yourator.co OR from:cakeresume.com "
-    "OR subject:詢問意願 OR subject:面試邀請 OR subject:職缺邀請 "
+    "OR subject:詢問意願 OR subject:面試邀請 OR subject:職缺邀請"
+    ") "
     "-subject:[JobAgent]"
 )
 GMAIL_MAX_RESULTS = 20
